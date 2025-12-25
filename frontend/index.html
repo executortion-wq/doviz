@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Döviz Kurları</title>
+</head>
+<body>
+  <h1>Güncel Döviz Kurları</h1>
+  <ul id="rates"></ul>
+
+  <script>
+    async function getRates() {
+      const res = await fetch("/api/rates");
+      const data = await res.json();
+      const list = document.getElementById("rates");
+      list.innerHTML = "";
+      for (let [cur, val] of Object.entries(data.rates)) {
+        list.innerHTML += `<li>${cur}: ${val}</li>`;
+      }
+    }
+    getRates();
+  </script>
+</body>
+</html>
